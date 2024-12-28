@@ -36,7 +36,7 @@ jobs:
         with:
           host: ${{ secrets.SSH_HOST }}       # Your Lightsail instance public IP or DNS
           username: ${{ secrets.SSH_USER }}   # Your SSH username (e.g., ubuntu)
-          key: ${{ secrets.SSH_PRIVATE_KEY }} # Your SSH private key for authentication
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # Your SSH private key for authentication hell
           script: |
             echo "Deploying application to Lightsail instance..."
             cd .
