@@ -1,0 +1,21 @@
+# This is a Docker Compose file used to define and manage multi-container Docker applications.
+# The file specifies the configuration for two services: parcel-search-backend and redis.
+
+version: '3.8'  # Specifies the version of the Docker Compose file format.
+
+services:
+  parcel-search-backend:
+    build:
+      context: .  # Points to the directory containing the Dockerfile for building the image.
+      dockerfile: Dockerfile  # Specifies the Dockerfile to use for building the Docker image.
+    image: tcu/demo_project:1.0  # Defines the name and version/tag of the Docker image to use.
+    ports:
+      - "8080:8081"  # Maps port 8080 of the container to port 8080 on the host machine.
+
+  redis:
+    image: redis:6.0.9  # Uses the official Redis Docker image with version 6.0.9.
+    ports:
+      - "6379:6379"  # Maps port 6379 of the container to port 6379 on the host machine.
+
+
+
