@@ -21,3 +21,39 @@ jobs:
 
       - name: Build with Maven
         run: mvn --batch-mode package
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ secrets.AWS_PARCEL_SEARCH_ROLE }}
+          role-session-name: github-parcel-search
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build and Push Multi-Container Images
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: latest
+        run: |
+          # Build and push each service defined in docker-compose.yml
+          docker-compose -f docker-compose.yml build
+          docker-compose -f docker-compose.yml push
+
+      - name: SSH into Lightsail and Deploy with Docker Compose
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AWS_HOST }}
+          username: ${{ secrets.AWS_USER }}
+          key: ${{ secrets.AWS_KEY }}
+          script: |
+            # SSH into Lightsail and run docker-compose to start the containers
+            docker-compose -f docker-compose.yml up -d
+            docker-compose ps
+            docker-compose logs
