@@ -44,7 +44,8 @@ jobs:
             sudo apt-get install -y docker-compose
             sudo usermod -aG docker $USER 
             pwd
-            cd ..
+            cd $GITHUB_WORKSPACE
+            pwd
             ls
             docker-compose -f docker-compose.yml pull
             docker-compose -f docker-compose.yml up -d
