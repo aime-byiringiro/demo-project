@@ -43,8 +43,11 @@ jobs:
             sudo apt-get install -y docker.io
             sudo apt-get install -y docker-compose
             sudo usermod -aG docker $USER 
-            pwd
-            cd $GITHUB_WORKSPACE
+            if [ ! -d "demo_project" ]; then
+              echo "Cloning the repository..."
+              git clone git@github.com:aime-byiringiro/demo-project.git  # Replace with your repository URL
+            fi
+            cd demo_project
             pwd
             ls
             docker-compose -f docker-compose.yml pull
