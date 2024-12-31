@@ -44,7 +44,7 @@ jobs:
             sudo apt-get install -y docker-compose
             sudo usermod -aG docker $USER 
             cd .
-            docker-compose -f docker-compose.yml pull
-            docker-compose -f docker-compose.yml up -d
-            docker-compose -f docker-compose.yml ps
-            docker-compose -f docker-compose.yml logs
+            docker-compose -f ../docker-compose.yml pull
+            docker-compose -f ../docker-compose.yml up -d
+            docker-compose -f ../docker-compose.yml ps
+            docker-compose -f ../docker-compose.yml logs
