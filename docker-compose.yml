@@ -8,7 +8,7 @@ services:
     build:
       context: .  # Points to the directory containing the Dockerfile for building the image.
       dockerfile: Dockerfile  # Specifies the Dockerfile to use for building the Docker image.
-    image: tcu/demo_project:1.0  # Defines the name and version/tag of the Docker image to use.
+    image: tcu/demo_project:10.0  # Defines the name and version/tag of the Docker image to use.
     ports:
       - "4161:4161"  # Maps port 8080 of the container to port 8080 on the host machine.
 
