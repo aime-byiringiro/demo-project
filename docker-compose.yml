@@ -10,7 +10,7 @@ services:
       dockerfile: Dockerfile  # Specifies the Dockerfile to use for building the Docker image.
     image: tcu/demo_project:1.0  # Defines the name and version/tag of the Docker image to use.
     ports:
-      - "8080:8081"  # Maps port 8080 of the container to port 8080 on the host machine.
+      - "8080:8080"  # Maps port 8080 of the container to port 8080 on the host machine.
 
   redis:
     image: redis:6.0.9  # Uses the official Redis Docker image with version 6.0.9.
