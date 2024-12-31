@@ -39,15 +39,12 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }} # Your SSH private key for authentication hell
           script: |
             echo "Deploying application to Lightsail instance..."
-#           1. installing docker and docker-compose
             sudo apt-get update
             sudo apt-get install -y docker.io
             sudo apt-get install -y docker-compose
-            sudo usermod -aG docker $USER
-           
-    
+            sudo usermod -aG docker $USER 
             cd .
-            # Pull the latest Docker image if needed, or build and start your containers
-            docker-compose.yml up -d
-            docker-compose ps
-            docker-compose logs
+            docker-compose -f docker-compose.yml pull
+            docker-compose -f docker-compose.yml up -d
+            docker-compose -f docker-compose.yml ps
+            docker-compose -f docker-compose.yml logs
