@@ -43,17 +43,12 @@ jobs:
             sudo apt-get install -y docker.io
             sudo apt-get install -y docker-compose
             sudo usermod -aG docker $USER 
-          # 1. Check if the "demo-project" directory exists
             if [ -d "demo-project" ]; then
             echo "Removing the existing 'demo-project' repository..."
             rm -rf demo-project
             fi
-            
-            # 2. Clone the repository (since it doesn't exist now)
             echo "Cloning the repository from GitHub..."
             git clone https://github.com/aime-byiringiro/demo-project.git
-            
-            # 3. Change directory into the cloned repository, print the path, and list files
             cd demo-project || exit
             pwd
             ls
